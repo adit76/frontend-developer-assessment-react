@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 
 function TextField({
-  name, label, value, handleChange,
+  name, label, error, value, handleChange,
 }) {
   return (
     <div className="form__input">
@@ -20,6 +20,7 @@ function TextField({
         }
 
       <input className="form__input__input" type="text" name={name} onChange={handleChange} value={value} />
+      <p className="error__message">{error}</p>
 
     </div>
   );
