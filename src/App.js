@@ -1,17 +1,23 @@
 import React from 'react';
-import logo from './logo.png';
-import './App.css';
+import {
+  Routes,
+  Route,
+} from 'react-router-dom';
 
 import FormPage from './Pages/FormPage';
+import ListPage from './Pages/ListPage';
+import Header from './Components/Header';
+
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-
-      <FormPage />
+      <Header />
+      <Routes>
+        <Route path="/" element={<ListPage />} />
+        <Route path="form" element={<FormPage />} />
+      </Routes>
     </div>
   );
 }
