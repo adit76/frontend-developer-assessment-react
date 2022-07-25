@@ -1,4 +1,6 @@
 .select-search {
+    border: 1px solid var(--sub-color);
+    border-radius: 5px;
     width: 300px;
     position: relative;
     font-family: "Nunito Sans", sans-serif;

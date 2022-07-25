@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './index.css';
+
 import countries from 'countries-list';
+
 import TextField from '../../Components/TextField';
 import RadioButton from '../../Components/RadioButton';
 import Select from '../../Components/Select';
+import DatePicker from '../../Components/DatePicker';
+import TextArea from '../../Components/TextArea';
 
 function FormPage() {
   const [formInput, setFormInput] = useState({
@@ -14,7 +18,7 @@ function FormPage() {
     phone: '',
     email: '',
     address: '',
-    dob: '',
+    dob: new Date(),
     eduBackground: '',
   });
 
@@ -55,6 +59,10 @@ function FormPage() {
 
   countriesList();
 
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
   const [error, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -64,22 +72,28 @@ function FormPage() {
     const formErrors = {};
     // Required Error handling
     if (!formInput.fName) {
-      formErrors.fName = 'First name is required';
+      formErrors.fName = 'First name is required!';
     }
     if (!formInput.lName) {
-      formErrors.lName = 'Last name is required';
+      formErrors.lName = 'Last name is required!';
     }
     if (!formInput.phone) {
-      formErrors.phone = 'Phone is required';
+      formErrors.phone = 'Phone is required!';
+    }
+    if (!isValidEmail(formInput.email)) {
+      formErrors.email = 'Email is invalid!';
     }
     if (!formInput.email) {
-      formErrors.email = 'Email is required';
+      formErrors.email = 'Email is required!';
     }
     if (!formInput.address) {
-      formErrors.address = 'Address is required';
+      formErrors.address = 'Address is required!';
     }
     if (!formInput.nationality) {
-      formErrors.nationality = 'Nationality is required';
+      formErrors.nationality = 'Nationality is required!';
+    }
+    if (!formInput.eduBackground) {
+      formErrors.eduBackground = 'Education background is required!';
     }
 
     setErrors(formErrors);
@@ -89,12 +103,12 @@ function FormPage() {
       setFormInput({
         fName: '',
         lName: '',
-        gender: '',
+        gender: 'male',
         nationality: '',
         phone: '',
         email: '',
         address: '',
-        dob: '',
+        dob: new Date(),
         eduBackground: '',
       });
       console.log('Form Submitted successfully', formInput);
@@ -116,7 +130,7 @@ function FormPage() {
         [name]: '',
       }));
     } else {
-      // Condition Specifically for Select Component
+      // Condition Specifically for Select Component or If returns only value
       setFormInput((prevState) => ({
         ...prevState,
         nationality: e,
@@ -128,12 +142,23 @@ function FormPage() {
     }
   };
 
+  const handleDatePicker = (e) => {
+    console.log(e);
+    setFormInput((prevState) => ({
+      ...prevState,
+      dob: e,
+    }));
+    setErrors((prevState) => ({
+      ...prevState,
+      dob: new Date(),
+    }));
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <TextField
           name="fName"
-          type="text"
           label="First Name"
           handleChange={handleChange}
           value={formInput.fName}
@@ -141,7 +166,6 @@ function FormPage() {
         />
         <TextField
           name="lName"
-          type="text"
           label="Last Name"
           handleChange={handleChange}
           value={formInput.lName}
@@ -149,7 +173,6 @@ function FormPage() {
         />
         <TextField
           name="phone"
-          type="text"
           label="Contact No"
           handleChange={handleChange}
           value={formInput.phone}
@@ -157,7 +180,6 @@ function FormPage() {
         />
         <TextField
           name="email"
-          type="email"
           label="Email"
           handleChange={handleChange}
           value={formInput.email}
@@ -169,6 +191,7 @@ function FormPage() {
           value={formInput.gender}
           error={error.gender}
           gender={genderOptions}
+          label="Gender:"
         />
 
         <Select
@@ -179,13 +202,28 @@ function FormPage() {
           placeholder="Search something"
         />
 
+        <DatePicker
+          name="dob"
+          label="Date of Birth"
+          selected={formInput.dob}
+          handleDatePicker={handleDatePicker}
+          maxDate={new Date()}
+        />
+
         <TextField
           name="address"
-          type="address"
           label="Address"
           handleChange={handleChange}
           value={formInput.address}
           error={error.address}
+        />
+
+        <TextArea
+          name="eduBackground"
+          label="Education background"
+          handleChange={handleChange}
+          value={formInput.eduBackground}
+          error={error.eduBackground}
         />
 
         <input type="submit" value="Submit Form" />
