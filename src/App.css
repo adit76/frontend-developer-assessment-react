@@ -77,7 +77,7 @@ input:required:after {
 }
 	/* sets up required form fields with the conventional following red asterix */
 input[type="email"]:invalid { 
-	background: #f00;
+	border: 1px solid #f00;
 }
 	/* causes a visual alert in browsers that do client-side checking of HTML5 email field – this may already be the default in some browsers. */
 	

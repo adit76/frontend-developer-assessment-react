@@ -1,7 +1,6 @@
 import React from 'react';
-import './index.css';
 
-function TextField({
+function TextArea({
   name, label, error, value, handleChange,
 }) {
   return (
@@ -19,11 +18,11 @@ function TextField({
               : null
         }
 
-      <input className={`form__input__input ${error ? 'form__input__input--error' : ''}`} type="text" name={name} onChange={handleChange} value={value} />
+      <textarea className={`form__input__input ${error ? 'form__input__input--error' : ''}`} name={name} onChange={handleChange} value={value} />
       <p className="error__message">{error}</p>
 
     </div>
   );
 }
 
-export default TextField;
+export default TextArea;
