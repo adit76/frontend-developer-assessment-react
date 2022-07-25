@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './index.css';
 
 import countries from 'countries-list';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import TextField from '../../Components/TextField';
 import RadioButton from '../../Components/RadioButton';
@@ -52,7 +54,7 @@ function FormPage() {
     Object.keys(nations).forEach((key) => {
       nationalityOptions.push({
         name: nations[key].name,
-        value: key,
+        value: nations[key].name,
       });
     });
   };
@@ -76,6 +78,9 @@ function FormPage() {
     }
     if (!formInput.lName) {
       formErrors.lName = 'Last name is required!';
+    }
+    if (!formInput.phone.match('[0-9]{10}')) {
+      formErrors.phone = 'Phone is invalid!';
     }
     if (!formInput.phone) {
       formErrors.phone = 'Phone is required!';
@@ -111,7 +116,8 @@ function FormPage() {
         dob: new Date(),
         eduBackground: '',
       });
-      console.log('Form Submitted successfully', formInput);
+      console.log('Submitted Form:', formInput);
+      toast.success('Form Submitted Successfully!');
     }
   };
 
@@ -143,7 +149,6 @@ function FormPage() {
   };
 
   const handleDatePicker = (e) => {
-    console.log(e);
     setFormInput((prevState) => ({
       ...prevState,
       dob: e,
@@ -155,7 +160,7 @@ function FormPage() {
   };
 
   return (
-    <div>
+    <div className="form__wrapper">
       <form onSubmit={handleSubmit}>
         <TextField
           name="fName"
@@ -199,12 +204,12 @@ function FormPage() {
           value={formInput.nationality}
           handleChange={handleChange}
           error={error.nationality}
-          placeholder="Search something"
+          placeholder="Nationality"
         />
 
         <DatePicker
           name="dob"
-          label="Date of Birth"
+          label="Date of Birth:"
           selected={formInput.dob}
           handleDatePicker={handleDatePicker}
           maxDate={new Date()}
@@ -226,8 +231,10 @@ function FormPage() {
           error={error.eduBackground}
         />
 
-        <input type="submit" value="Submit Form" />
+        <input className="submit__btn" type="submit" value="Submit Form" />
       </form>
+
+      <ToastContainer />
     </div>
   );
 }

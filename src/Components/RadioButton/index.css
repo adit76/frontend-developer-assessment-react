@@ -1,0 +1,17 @@
+.form__input__radioWrapper{
+    display: flex;
+}
+
+.label{
+    color: var(--sub-color);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.form__input__radioWrapper .form__input__radioItem{
+    margin-right: 30px;
+}
+
+.form__input__radioItem .radioItem__label{
+    margin-left: 5px;
+}

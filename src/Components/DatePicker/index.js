@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 import Picker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -8,7 +9,7 @@ function DatePicker({
 }) {
   return (
     <div className="form__input">
-      <label htmlFor={name}>{label}</label>
+      <label className="label" htmlFor={name}>{label}</label>
       <Picker
         name={name}
         selected={selected}
