@@ -191,6 +191,7 @@ function FormPage() {
           value={formInput.gender}
           error={error.gender}
           gender={genderOptions}
+          label="Gender:"
         />
 
         <Select
