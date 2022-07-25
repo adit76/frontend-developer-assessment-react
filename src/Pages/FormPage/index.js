@@ -117,7 +117,7 @@ function FormPage() {
         eduBackground: '',
       });
       console.log('Submitted Form:', formInput);
-      toast.success('Form Submitted successfully!');
+      toast.success('Form Submitted Successfully!');
     }
   };
 
