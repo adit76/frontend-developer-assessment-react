@@ -1,25 +1,14 @@
-:root {
-    --sub-color: grey;
-    --main-color: black
-}
-
-.form__input {
-    position: relative;
-    margin: 45px 0;
-}
-
 .form__input .form__input__input {
     background: none;
     background-color: white;
     color: var(--sub-color);
     font-size: 18px;
-    padding: 10px 10px 10px 5px;
+    padding: 10px;
     display: block;
     width: 100%;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid var(--sub-color);
-    margin: 25px 0;
+    border-radius: 5px;
+    border: 1px solid var(--sub-color);
+    margin: 5px 0;
 }
 
 .form__input .form__input__input:focus {
@@ -27,7 +16,9 @@
 }
 
 .form__input .form__input__input:focus:focus ~ .form__input__label {
-    top: -14px;
+    top: -9px;
+    padding: 0px 5px;
+    background: #fff;
     font-size: 12px;
     color: var(--main-color);
 }
@@ -39,16 +30,22 @@ input[type='password'] {
 .form__input__label {
     color: var(--sub-color);
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 500;
     position: absolute;
     pointer-events: none;
-    left: 5px;
+    left: 10px;
     top: 10px;
     transition: 300ms ease all;
 }
 
 .form__input__label.form__input__label--shrink {
-    top: -14px;
+    top: -9px;
+    padding: 0px 5px;
+    background: #fff;
     font-size: 12px;
     color: var(--main-color);
+}
+
+.form__input__input.form__input__input--error {
+    border: 1px solid #f00;
 }
