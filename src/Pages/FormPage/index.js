@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import './index.css';
+import countries from 'countries-list';
 import TextField from '../../Components/TextField';
 import RadioButton from '../../Components/RadioButton';
+import Select from '../../Components/Select';
 
 function FormPage() {
   const [formInput, setFormInput] = useState({
@@ -37,6 +40,21 @@ function FormPage() {
     },
   ];
 
+  // Options for Select
+  const nationalityOptions = [];
+
+  const countriesList = () => {
+    const nations = countries.countries;
+    Object.keys(nations).forEach((key) => {
+      nationalityOptions.push({
+        name: nations[key].name,
+        value: key,
+      });
+    });
+  };
+
+  countriesList();
+
   const [error, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -60,6 +78,9 @@ function FormPage() {
     if (!formInput.address) {
       formErrors.address = 'Address is required';
     }
+    if (!formInput.nationality) {
+      formErrors.nationality = 'Nationality is required';
+    }
 
     setErrors(formErrors);
 
@@ -80,19 +101,31 @@ function FormPage() {
     }
   };
 
-  // Textfield Change Function
+  // Textfield and RadioButton Change Function
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    setErrors((prevState) => ({
-      ...prevState,
-      [name]: '',
-    }));
+    // Switching based on component for TextField, RadioButton and Select
+    if (typeof (e) === 'object') {
+      const { name, value } = e.target;
 
-    console.log(formInput);
+      setFormInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+      setErrors((prevState) => ({
+        ...prevState,
+        [name]: '',
+      }));
+    } else {
+      // Condition Specifically for Select Component
+      setFormInput((prevState) => ({
+        ...prevState,
+        nationality: e,
+      }));
+      setErrors((prevState) => ({
+        ...prevState,
+        nationality: '',
+      }));
+    }
   };
 
   return (
@@ -138,10 +171,18 @@ function FormPage() {
           gender={genderOptions}
         />
 
+        <Select
+          options={nationalityOptions}
+          value={formInput.nationality}
+          handleChange={handleChange}
+          error={error.nationality}
+          placeholder="Search something"
+        />
+
         <TextField
           name="address"
           type="address"
-          label="Last Name"
+          label="Address"
           handleChange={handleChange}
           value={formInput.address}
           error={error.address}

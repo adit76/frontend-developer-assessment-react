@@ -1,9 +1,7 @@
 import React from 'react';
 import './index.css';
 
-function RadioButton({
-  error, handleChange, gender,
-}) {
+function RadioButton({ handleChange, gender }) {
   return (
     <div className="form__input">
       {gender.map((item, index) => (
@@ -12,11 +10,6 @@ function RadioButton({
           <label htmlFor={item.name}>{ item.label }</label>
         </div>
       ))}
-
-      <p className="error__message">
-        {error}
-      </p>
-
     </div>
   );
 }
