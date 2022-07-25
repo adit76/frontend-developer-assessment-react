@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import TextField from '../../Components/TextField';
+import RadioButton from '../../Components/RadioButton';
 
 function FormPage() {
   const [formInput, setFormInput] = useState({
     fName: '',
     lName: '',
-    gender: '',
+    gender: 'male',
     nationality: '',
     phone: '',
     email: '',
@@ -13,6 +14,28 @@ function FormPage() {
     dob: '',
     eduBackground: '',
   });
+
+  // Options for RadioButton
+  const genderOptions = [
+    {
+      id: 1,
+      name: 'gender',
+      label: 'Male',
+      value: 'male',
+    },
+    {
+      id: 2,
+      name: 'gender',
+      label: 'Female',
+      value: 'female',
+    },
+    {
+      id: 3,
+      name: 'gender',
+      label: 'Other',
+      value: 'other',
+    },
+  ];
 
   const [error, setErrors] = useState({});
 
@@ -53,10 +76,11 @@ function FormPage() {
         dob: '',
         eduBackground: '',
       });
-      console.log('Form Submitted successfully');
+      console.log('Form Submitted successfully', formInput);
     }
   };
 
+  // Textfield Change Function
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -67,6 +91,8 @@ function FormPage() {
       ...prevState,
       [name]: '',
     }));
+
+    console.log(formInput);
   };
 
   return (
@@ -104,6 +130,14 @@ function FormPage() {
           value={formInput.email}
           error={error.email}
         />
+
+        <RadioButton
+          handleChange={handleChange}
+          value={formInput.gender}
+          error={error.gender}
+          gender={genderOptions}
+        />
+
         <TextField
           name="address"
           type="address"
