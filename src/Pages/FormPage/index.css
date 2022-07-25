@@ -1,0 +1,16 @@
+:root {
+    --sub-color: grey;
+    --main-color: black
+}
+
+.form__input {
+    position: relative;
+    margin: 45px 15px;
+}
+
+.form__input .error__message{
+    position: absolute;
+    bottom: -30px;
+    font-size: 0.75rem;
+    color: #d32f2f;
+}
