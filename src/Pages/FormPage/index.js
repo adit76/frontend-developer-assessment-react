@@ -5,11 +5,14 @@ import countries from 'countries-list';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useDispatch } from 'react-redux';
+import { setUsers } from '../../redux/users';
 import TextField from '../../Components/TextField';
 import RadioButton from '../../Components/RadioButton';
 import Select from '../../Components/Select';
 import DatePicker from '../../Components/DatePicker';
 import TextArea from '../../Components/TextArea';
+import Button from '../../Components/Button';
 
 function FormPage() {
   const [formInput, setFormInput] = useState({
@@ -23,6 +26,8 @@ function FormPage() {
     dob: new Date(),
     eduBackground: '',
   });
+
+  const dispatch = useDispatch();
 
   // Options for RadioButton
   const genderOptions = [
@@ -104,21 +109,24 @@ function FormPage() {
     setErrors(formErrors);
 
     // No Error in form and submission
-    if (Object.keys(formErrors).length === 0) {
-      setFormInput({
-        fName: '',
-        lName: '',
-        gender: 'male',
-        nationality: '',
-        phone: '',
-        email: '',
-        address: '',
-        dob: new Date(),
-        eduBackground: '',
-      });
-      console.log('Submitted Form:', formInput);
-      toast.success('Form Submitted Successfully!');
-    }
+    // if (Object.keys(formErrors).length === 0) {
+
+    setFormInput({
+      fName: '',
+      lName: '',
+      gender: 'male',
+      nationality: '',
+      phone: '',
+      email: '',
+      address: '',
+      dob: new Date(),
+      eduBackground: '',
+    });
+
+    console.log('Submitted Form:', formInput);
+    toast.success('Form Submitted Successfully!');
+    dispatch(setUsers(formInput));
+    // }
   };
 
   // Textfield and RadioButton Change Function
@@ -231,7 +239,7 @@ function FormPage() {
           error={error.eduBackground}
         />
 
-        <input className="submit__btn" type="submit" value="Submit Form" />
+        <Button title="Submit Form" />
       </form>
 
       <ToastContainer />
