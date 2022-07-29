@@ -1,0 +1,34 @@
+.container__wrapper{
+    margin: 50px;
+    text-align: center;
+}
+
+
+.header1{
+  margin-bottom:1rem;
+  text-decoration: underline;
+}
+
+p.user__details {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+p.user__details span{
+  font-weight: normal;
+}
+
+.msc-blank {
+  text-align: center;
+}
+.msc-blank-icon {
+  color: gray;
+  font-size: 4rem;
+}
+.msc-blank-title {
+  font-size: 1.6rem;
+}
+.msc-blank-desc {
+  font-size: 1rem;
+  color: gray;
+}
